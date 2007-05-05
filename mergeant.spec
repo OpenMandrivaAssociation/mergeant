@@ -5,7 +5,8 @@
 Summary: GNOME DB frontend
 Name: %name
 Version: %version
-Release: %mkrel 22License: GPL
+Release: %mkrel 2
+License: GPL
 Group: Databases
 URL: http://www.gnome-db.org/
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
