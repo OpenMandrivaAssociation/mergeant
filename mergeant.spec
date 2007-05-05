@@ -5,8 +5,7 @@
 Summary: GNOME DB frontend
 Name: %name
 Version: %version
-Release: %mkrel 1
-License: GPL
+Release: %mkrel 22License: GPL
 Group: Databases
 URL: http://www.gnome-db.org/
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
@@ -20,6 +19,7 @@ BuildRequires: libglade2.0-devel
 BuildRequires: automake1.8
 BuildRequires: gnome-common
 BuildRequires: intltool
+BuildRequires: gtk-doc
 Requires: scrollkeeper
 Requires: gnome-db2.0
 
@@ -72,7 +72,6 @@ EOF
 #remove unpackaged files
 rm -f $RPM_BUILD_ROOT%{_libdir}/mergeant/plugins/*.{la,a}
 
-
 %post
 if [ -x %{_bindir}/scrollkeeper-update ]; then %{_bindir}/scrollkeeper-update -q || true ; fi
 %{update_menus}
@@ -97,5 +96,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_menudir}/*
 %{_iconsdir}/*/%name.png
 %{_iconsdir}/%name.png
-
-
