@@ -1,6 +1,6 @@
 %define name mergeant
-%define version 0.65
-%define cvsversion 0.cvs20060309
+%define version 0.66
+#%define cvsversion 0.cvs20060309
 
 Summary: GNOME DB frontend
 Name: %name
