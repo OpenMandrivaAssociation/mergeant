@@ -30,7 +30,7 @@ over again those SQL commands, although it is still possible to do so).
 
 %build
 
-%configure2_5x
+%configure2_5x --disable-update-mimedb=yes
 %make
 
 %install
@@ -67,7 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
 %{_datadir}/omf/*
-%{_datadir}/mime/packages/*.xml
+%{_datadir}/mime/*/*.xml
 %{_iconsdir}/*/%name.png
 %{_iconsdir}/hicolor/*/*/*
 %{_iconsdir}/%name.png
