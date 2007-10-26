@@ -12,7 +12,7 @@ BuildRequires: scrollkeeper
 Buildrequires: gnome-db2.0-devel
 BuildRequires: libgnomeprintui2-2-devel
 BuildRequires: libglade2.0-devel
-BuildRequires: automake1.8
+BuildRequires: automake
 BuildRequires: gnome-common
 BuildRequires: intltool
 BuildRequires: gtk-doc
@@ -40,32 +40,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %find_lang %{name} --with-gnome
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
-[Desktop Entry]
-Name=Mergeant
-Comment=GNOME DB frontend
-Exec=%{name}
-Icon=%{name}
-Terminal=false
-Type=Application
-Categories=Database;Office;
-EOF
-
 %__install -D -m 644 %{name}48.png %buildroot/%_liconsdir/%name.png
 %__install -D -m 644 %{name}32.png %buildroot/%_iconsdir/%name.png
 %__install -D -m 644 %{name}16.png %buildroot/%_miconsdir/%name.png
 
-#remove unpackaged files
-rm -f $RPM_BUILD_ROOT%{_libdir}/mergeant/plugins/*.{la,a}
-
 %post
 %update_scrollkeeper
 %{update_menus}
+%update_mime_database
+%{update_icon_cache hicolor}
 
 %postun
 %clean_scrollkeeper
 %{clean_menus}
+%clean_mime_database
+%{clean_icon_cache hicolor}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -75,10 +64,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc README ChangeLog AUTHORS BUGS TODO 
 %{_bindir}/*
 %{_libdir}/bonobo/servers/*
-%{_datadir}/application-registry/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*
 %{_datadir}/omf/*
-%{_datadir}/mime-info/*
+%{_datadir}/mime/packages/*.xml
 %{_iconsdir}/*/%name.png
+%{_iconsdir}/hicolor/*/*/*
 %{_iconsdir}/%name.png
