@@ -1,11 +1,7 @@
-%define name mergeant
-%define version 0.66
-#%define cvsversion 0.cvs20060309
-
 Summary: GNOME DB frontend
-Name: %name
-Version: %version
-Release: %mkrel 2
+Name: mergeant
+Version: 0.67
+Release: %mkrel 1
 License: GPL
 Group: Databases
 URL: http://www.gnome-db.org/
@@ -15,7 +11,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: scrollkeeper
 Buildrequires: gnome-db2.0-devel
 BuildRequires: libgnomeprintui2-2-devel
-BuildRequires: libgnomeui2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: automake1.8
 BuildRequires: gnome-common
@@ -45,14 +40,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %find_lang %{name} --with-gnome
 
-# Menu entry 
-mkdir -p $RPM_BUILD_ROOT/%{_menudir}
-cat >$RPM_BUILD_ROOT/%{_menudir}/%{name} <<EOF
-?package(%{name}): command="%{_bindir}/mergeant" icon="%name.png" needs="X11" \
-section="Applications/Databases" title="Mergeant" longtitle="DBMS admin tool" \
-xdg="true"
-EOF
-
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
@@ -62,7 +49,7 @@ Exec=%{name}
 Icon=%{name}
 Terminal=false
 Type=Application
-Categories=X-MandrivaLinux-MoreApplications-Databases;Database;Office;
+Categories=Database;Office;
 EOF
 
 %__install -D -m 644 %{name}48.png %buildroot/%_liconsdir/%name.png
@@ -73,11 +60,11 @@ EOF
 rm -f $RPM_BUILD_ROOT%{_libdir}/mergeant/plugins/*.{la,a}
 
 %post
-if [ -x %{_bindir}/scrollkeeper-update ]; then %{_bindir}/scrollkeeper-update -q || true ; fi
+%update_scrollkeeper
 %{update_menus}
 
 %postun
-if [ -x %{_bindir}/scrollkeeper-update ]; then %{_bindir}/scrollkeeper-update -q || true ; fi
+%clean_scrollkeeper
 %{clean_menus}
 
 %clean
@@ -93,6 +80,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/*
 %{_datadir}/omf/*
 %{_datadir}/mime-info/*
-%{_menudir}/*
 %{_iconsdir}/*/%name.png
 %{_iconsdir}/%name.png
