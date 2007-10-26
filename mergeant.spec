@@ -30,7 +30,7 @@ over again those SQL commands, although it is still possible to do so).
 
 %build
 
-%configure2_5x --disable-update-mimedb=yes
+%configure2_5x --disable-update-mimedb
 %make
 
 %install
