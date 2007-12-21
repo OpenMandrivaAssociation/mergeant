@@ -7,6 +7,7 @@ Group: Databases
 URL: http://www.gnome-db.org/
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1: %name-icons.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: scrollkeeper
 Buildrequires: gnome-db2.0-devel
 BuildRequires: libgnomeprintui2-2-devel
