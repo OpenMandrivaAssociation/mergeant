@@ -44,17 +44,21 @@ rm -rf $RPM_BUILD_ROOT
 %__install -D -m 644 %{name}32.png %buildroot/%_iconsdir/%name.png
 %__install -D -m 644 %{name}16.png %buildroot/%_miconsdir/%name.png
 
+%if %mdkversion < 200900
 %post
 %update_scrollkeeper
 %{update_menus}
 %update_mime_database
 %{update_icon_cache hicolor}
+%endif
 
+%if %mdkversion < 200900
 %postun
 %clean_scrollkeeper
 %{clean_menus}
 %clean_mime_database
 %{clean_icon_cache hicolor}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
