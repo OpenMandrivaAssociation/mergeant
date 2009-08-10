@@ -1,12 +1,13 @@
 Summary:	GNOME DB frontend
 Name:		mergeant
 Version:	0.67
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.gnome-db.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1:	%{name}-icons.tar.bz2
+Patch:		mergeant-0.67-format-strings.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	scrollkeeper
 Buildrequires:	gnome-db2.0-devel
@@ -26,6 +27,7 @@ over again those SQL commands, although it is still possible to do so).
 
 %prep
 %setup -q -n %{name}-%{version} -a1
+%patch -p1
 
 %build
 
