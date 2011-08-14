@@ -1,7 +1,7 @@
 Summary:	GNOME DB frontend
 Name:		mergeant
 Version:	0.67
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.gnome-db.org/
