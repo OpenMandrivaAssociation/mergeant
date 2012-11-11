@@ -1,0 +1,135 @@
+diff -p -up mergeant-0.67/src/query-druid.c~ mergeant-0.67/src/query-druid.c
+--- mergeant-0.67/src/query-druid.c~	2007-10-21 14:54:05.000000000 +0200
++++ mergeant-0.67/src/query-druid.c	2009-08-10 12:34:10.000000000 +0200
+@@ -970,7 +970,7 @@ select_fields_add_expr (GtkButton *butto
+ 					       str);
+ 
+ 		dlg = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+-							  GTK_BUTTONS_CLOSE, msg);
++							  GTK_BUTTONS_CLOSE, "%s", msg);
+ 		g_free (msg);
+ 		gtk_dialog_run (GTK_DIALOG (dlg));
+ 		gtk_widget_destroy (dlg);
+@@ -1174,7 +1174,7 @@ sql_query_text_changed_cb (GtkButton *bu
+ 	else {
+ 		str = g_strdup_printf ("<b>%s</b>", _("No error parsing and analyzing the query"));
+ 		dlg = gtk_message_dialog_new_with_markup ((GtkWindow*) toplevel, GTK_DIALOG_DESTROY_WITH_PARENT,
+-							  GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, str);
++							  GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, "%s", str);
+ 		g_free (str);
+ 	}
+ 	
+diff -p -up mergeant-0.67/src/query-editor.c~ mergeant-0.67/src/query-editor.c
+--- mergeant-0.67/src/query-editor.c~	2007-05-18 15:01:22.000000000 +0200
++++ mergeant-0.67/src/query-editor.c	2009-08-10 12:34:52.000000000 +0200
+@@ -580,7 +580,7 @@ sql_query_text_apply_cb (GtkButton *butt
+ 		if (GTK_WIDGET_TOPLEVEL (window))
+ 			window = NULL;
+ 		dlg = gtk_message_dialog_new ((GtkWindow*) window, GTK_DIALOG_MODAL, 
+-					      GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, msg);
++					      GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s", msg);
+ 		gtk_label_set_use_markup (GTK_LABEL (GTK_MESSAGE_DIALOG (dlg)->label), TRUE);
+ 		g_free (msg);
+ 		g_free (str);
+@@ -660,7 +660,7 @@ select_where_apply_cb (GtkButton *button
+ 					       sql);
+ 		
+ 		errdlg = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+-							     GTK_BUTTONS_CLOSE, msg);
++							     GTK_BUTTONS_CLOSE, "%s", msg);
+ 		g_free (msg);
+ 		gtk_dialog_run (GTK_DIALOG (errdlg));
+ 		gtk_widget_destroy (errdlg);
+diff -p -up mergeant-0.67/src/query-fields-editor.c~ mergeant-0.67/src/query-fields-editor.c
+--- mergeant-0.67/src/query-fields-editor.c~	2007-03-07 09:17:44.000000000 +0100
++++ mergeant-0.67/src/query-fields-editor.c	2009-08-10 12:35:47.000000000 +0200
+@@ -505,7 +505,7 @@ renderer_field_filter_edited_cb (GtkCell
+ 						       new_text);
+ 			
+ 			dlg = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+-								  GTK_BUTTONS_CLOSE, msg);
++								  GTK_BUTTONS_CLOSE, "%s", msg);
+ 			g_free (msg);
+ 			gtk_dialog_run (GTK_DIALOG (dlg));
+ 			gtk_widget_destroy (dlg);
+diff -p -up mergeant-0.67/src/query-fields-menu.c~ mergeant-0.67/src/query-fields-menu.c
+--- mergeant-0.67/src/query-fields-menu.c~	2006-10-27 17:02:09.000000000 +0200
++++ mergeant-0.67/src/query-fields-menu.c	2009-08-10 12:36:41.000000000 +0200
+@@ -527,7 +527,7 @@ menu_item_expr_activate_cb (GtkMenuItem 
+ 							       cstr);
+ 				
+ 				errdlg = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+-									     GTK_BUTTONS_CLOSE, msg);
++									     GTK_BUTTONS_CLOSE, "%s", msg);
+ 				g_free (msg);
+ 				gtk_dialog_run (GTK_DIALOG (errdlg));
+ 				gtk_widget_destroy (errdlg);
+diff -p -up mergeant-0.67/src/workspace-window.c~ mergeant-0.67/src/workspace-window.c
+--- mergeant-0.67/src/workspace-window.c~	2007-10-22 14:06:06.000000000 +0200
++++ mergeant-0.67/src/workspace-window.c	2009-08-10 12:37:51.000000000 +0200
+@@ -132,7 +132,7 @@ treat_close_request (WorkspaceWindowPriv
+ 				       gda_connection_get_dsn (cnc));
+ 		dlg = gtk_message_dialog_new_with_markup (GTK_WINDOW (window), GTK_DIALOG_MODAL,
+ 							  GTK_MESSAGE_WARNING,
+-							  GTK_BUTTONS_NONE, msg);
++							  GTK_BUTTONS_NONE, "%s", msg);
+ 		g_free (msg);
+ 		gtk_dialog_add_buttons (GTK_DIALOG (dlg), _("Rollback transaction"), 1,
+ 					_("Commit transaction"), 2, 
+diff -p -up mergeant-0.67/src/ws-queries.c~ mergeant-0.67/src/ws-queries.c
+--- mergeant-0.67/src/ws-queries.c~	2007-06-15 10:43:31.000000000 +0200
++++ mergeant-0.67/src/ws-queries.c	2009-08-10 12:38:54.000000000 +0200
+@@ -648,7 +648,7 @@ utility_query_execute_modif (GdaQuery *q
+ 						 "following query</small>\n\n%s"), confirm, sql);
+ 			dlg = gtk_message_dialog_new (GTK_WINDOW (parent_window), 0,
+ 						      GTK_MESSAGE_QUESTION,
+-						      GTK_BUTTONS_YES_NO, msg);
++						      GTK_BUTTONS_YES_NO, "%s", msg);
+ 			g_free (msg);
+ 			gtk_label_set_use_markup (GTK_LABEL (GTK_MESSAGE_DIALOG (dlg)->label), TRUE);
+ 			result = gtk_dialog_run (GTK_DIALOG (dlg));
+@@ -675,7 +675,7 @@ utility_query_execute_modif (GdaQuery *q
+ 				dlg = gtk_message_dialog_new (GTK_WINDOW (parent_window), 0,
+ 							      GTK_MESSAGE_ERROR,
+ 							      GTK_BUTTONS_CLOSE,
+-							      error->message);
++							      "%s", error->message);
+ 				gtk_dialog_run (GTK_DIALOG (dlg));
+ 				gtk_widget_destroy (dlg);
+ 				allok = FALSE;
+@@ -706,7 +706,7 @@ utility_query_execute_modif (GdaQuery *q
+ 		dlg = gtk_message_dialog_new (GTK_WINDOW (parent_window), 0,
+ 					      GTK_MESSAGE_ERROR,
+ 					      GTK_BUTTONS_CLOSE,
+-					      message);
++					      "%s", message);
+ 		g_free (message);
+ 		gtk_dialog_run (GTK_DIALOG (dlg));
+ 		gtk_widget_destroy (dlg);
+@@ -772,7 +772,7 @@ action_query_exec_cb (GtkAction *action,
+ 				dlg = gtk_message_dialog_new_with_markup (GTK_WINDOW (parent_window), 0,
+ 									  GTK_MESSAGE_ERROR,
+ 									  GTK_BUTTONS_CLOSE,
+-									  msg);
++									  "%s", msg);
+ 				g_free (msg);
+ 				if (error)
+ 					g_error_free (error);
+@@ -851,7 +851,7 @@ action_query_exec_cb (GtkAction *action,
+ 							 "used, or may contain some error.</small>\n\n%s"), sql);
+ 				dlg = gtk_message_dialog_new (GTK_WINDOW (parent_window), 0,
+ 							      GTK_MESSAGE_QUESTION,
+-							      GTK_BUTTONS_YES_NO, msg);
++							      GTK_BUTTONS_YES_NO, "%s", msg);
+ 				g_free (msg);
+ 				gtk_label_set_use_markup (GTK_LABEL (GTK_MESSAGE_DIALOG (dlg)->label), TRUE);
+ 				result = gtk_dialog_run (GTK_DIALOG (dlg));
+@@ -874,7 +874,7 @@ action_query_exec_cb (GtkAction *action,
+ 						dlg = gtk_message_dialog_new (GTK_WINDOW (parent_window), 0,
+ 									      GTK_MESSAGE_ERROR,
+ 									      GTK_BUTTONS_CLOSE,
+-									      message);
++									      "%s", message);
+ 						g_free (message);
+ 						gtk_dialog_run (GTK_DIALOG (dlg));
+ 						gtk_widget_destroy (dlg);
