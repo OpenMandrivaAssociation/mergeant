@@ -9,6 +9,11 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz
 Source1:	%{name}-icons.tar.bz2
 Patch:		mergeant-0.67-format-strings.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	scrollkeeper
 Buildrequires:	gnome-db2.0-devel
 BuildRequires:	libgnomeprintui2-2-devel
